@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="container__cards">
+        <div class="balance">
+            <div class="balance__mc">
+                <div class="wrapper">
+                    <div class="title"><p>My balance</p></div>
+                    <div class="dollars"><p>$921.48</p></div>
+                </div>
+                <div class="icons">
+                    <div class="circle1"></div>
+                    <div class="circle2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="spending">
+            <div class="spending__mc">
+                <div class="wrapper">
+                    <div class="spending__mc__title"><p>Spending - Last 7 days</p></div>
+                    <div class="spending__mc__graph">
+                        <div class="graphwrapper" *ngFor="let day of days; index as i">
+                            <div class="tooltip" id="tid{{i}}" [ngStyle]="{ 'visibility': isVisibles[i] }"><p>${{day.amount}}</p></div>
+                            <div class="value" id="lid{{i}}" (mousedown)="mouseDown(i)" (mouseup)="mouseUp(i)" *ngIf="day.amount !== highest" [ngStyle]="{ 'height.%': day.percent }"></div>
+                            <div class="value" id="hid{{i}}" (mousedown)="mouseDown(i)" (mouseup)="mouseUp(i)" *ngIf="day.amount === highest" style="background-color: hsl(186, 34%, 60%)" [ngStyle]="{ 'height.%': day.percent }"></div>
+                            <div class="day">
+                                <p>{{day.day}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="totalmonth"><p>Total this month</p><p id="expensetotal">${{expensetotal}}</p></div>
+                    <div class="lastmonth">
+                        <div class="percent">
+                            <p *ngIf="percent > 0">+</p><p id="percentdelta">{{percentdelta}}</p>
+                        </div>
+                        <p>from last month</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
